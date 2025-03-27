@@ -22,7 +22,7 @@ all the tests pass.
 
 def count_to_two():
     counter = 0
-    counter += 1  # <- change this!!
+    counter += 2  # <- change this!!
     return counter
 
 
@@ -32,7 +32,7 @@ def count_to_two_should_return_integer():
     assert isinstance(result, int), format_err_msg(True, isinstance(result, int))
 
 
-@skip_test  # Switch skip_test to run_test
+@run_test  # Switch skip_test to run_test
 def count_to_two_should_return_two():
     result = count_to_two()
     assert result == 2, format_err_msg(2, count_to_two())
