@@ -1,0 +1,4 @@
+git clone <github-link-here> - makes a local copy of the remote repo at the specified link
+git status - shows the state of files in our working directory and staging area
+git add <file-name> - adds a file from the working directory to the staging area
+git commit -m "<message-here>" - makes a commit including all changes in the staging area
