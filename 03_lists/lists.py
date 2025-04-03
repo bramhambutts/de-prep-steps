@@ -329,7 +329,7 @@ flatten_list_by_one([[1], [2], [[3, 4]]])  # returns [1, 2, [3, 4]]
 def flatten_list_by_one(nested_lists):
     new_list = []
     for item in nested_lists:
-        new_list + item
+        new_list = new_list + item
     return new_list
 
 
