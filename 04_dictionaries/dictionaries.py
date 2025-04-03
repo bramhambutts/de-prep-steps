@@ -23,8 +23,9 @@ add_price_to_product({ 'type': 'Tofu slices' }, 2.20) # returns
 
 
 def add_price_to_product(product, price):
-    # Your code here
-    pass
+    if 'type' in product:
+        product['price'] = price
+    return product
 
 
 @run_test
@@ -97,19 +98,20 @@ ignored and the product returned unchanged!
 
 
 def add_attribute_to_product(product, key, value):
-    # Your code here
-    pass
+    if type(key) in [str, int, float, bool]:
+        product[key] = value
+    return product
 
 
 # ❗ Remember to change @skip_test to @run_test!
-@skip_test
+@run_test
 def add_attribute_to_product_should_add_single_attribute_to_empty_product():
     result = add_attribute_to_product({}, "length", "2h 36m")
     expected = {"length": "2h 36m"}
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def add_attribute_to_product_should_add_string_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     result = add_attribute_to_product(product, "length", "2h 36m")
@@ -122,7 +124,7 @@ def add_attribute_to_product_should_add_string_attribute_to_product():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def add_attribute_to_product_should_add_integer_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     result = add_attribute_to_product(product, 36, 42)
@@ -135,7 +137,7 @@ def add_attribute_to_product_should_add_integer_attribute_to_product():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def add_attribute_to_product_should_add_float_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     result = add_attribute_to_product(product, 36.1, "dave")
@@ -148,7 +150,7 @@ def add_attribute_to_product_should_add_float_attribute_to_product():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def add_attribute_to_product_should_add_boolean_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     result = add_attribute_to_product(product, True, False)
@@ -161,7 +163,7 @@ def add_attribute_to_product_should_add_boolean_attribute_to_product():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def add_attribute_to_product_should_not_add_list_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     result = add_attribute_to_product(product, [1, 2, 3], "a")
@@ -169,7 +171,7 @@ def add_attribute_to_product_should_not_add_list_attribute_to_product():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def add_attribute_to_product_should_not_add_dictionary_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     result = add_attribute_to_product(product, {"a": "b"}, "a")
@@ -177,7 +179,7 @@ def add_attribute_to_product_should_not_add_dictionary_attribute_to_product():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def add_attribute_to_product_should_return_the_original_product_dictionary():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     result = add_attribute_to_product(product, "length", "2h 36m")
@@ -211,11 +213,12 @@ returns
 
 
 def create_northcoder(name, year_of_birth):
-    # Your code here
-    pass
+    age = 2023 - year_of_birth
+    age = age if age >= 0 else 'error'
+    return {'name': name, 'age': age, 'language': 'Python'}
 
 
-@skip_test
+@run_test
 def create_northcoder_should_create_northcoder_with_correct_age():
     result = create_northcoder("Joe", 2002)
 
@@ -224,14 +227,14 @@ def create_northcoder_should_create_northcoder_with_correct_age():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def create_northcoder_should_add_age_as_0_for_birth_year_2023():
     result = create_northcoder("Paul", 2023)
     expected = {"name": "Paul", "age": 0, "language": "Python"}
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def create_northcoder_should_show_age_error_if_birth_year_is_after_2023():
     result = create_northcoder("Zarkon", 2123)
     expected = {"name": "Zarkon", "age": "error", "language": "Python"}
@@ -266,11 +269,13 @@ Returns
 
 
 def delete_many_passwords(users):
-    # Your code here
-    pass
+    for user in users:
+        if 'password' in user:
+            del user['password']
+    return users
 
 
-@skip_test
+@run_test
 def delete_many_passwords_should_change_single_password():
     result = delete_many_passwords(
         [{"name": "Barry", "password": "ilovetea", "department": "Tea"}]
@@ -279,14 +284,14 @@ def delete_many_passwords_should_change_single_password():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def delete_many_passwords_should_not_change_user_without_password():
     result = delete_many_passwords([{"name": "Sandeep", "favourite_drink": "Coffee"}])
     expected = [{"name": "Sandeep", "favourite_drink": "Coffee"}]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def delete_many_passwords_should_change_many_users():
     result = delete_many_passwords(
         [
@@ -303,7 +308,7 @@ def delete_many_passwords_should_change_many_users():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def delete_many_passwords_should_change_many_users_when_some_do_not_have_passwords():
     result = delete_many_passwords(
         [
@@ -320,7 +325,7 @@ def delete_many_passwords_should_change_many_users_when_some_do_not_have_passwor
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def delete_many_passwords_should_return_empty_list_when_no_users_present():
     result = delete_many_passwords([])
     expected = []
@@ -353,18 +358,17 @@ get_northcoders_names(northcoders) # returns ['Callum', 'Carrie']
 
 
 def get_northcoders_names(northcoders):
-    # Your code here
-    pass
+    return [coder['name'] for coder in northcoders if 'name' in coder]
 
 
-@skip_test
+@run_test
 def get_northcoders_names_should_return_empty_list_if_input_is_empty():
     result = get_northcoders_names([])
     expected = []
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_northcoders_names_should_get_names_of_northcoders():
     result = get_northcoders_names(
         [
@@ -376,7 +380,7 @@ def get_northcoders_names_should_get_names_of_northcoders():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_northcoders_names_should_ignore_northcoders_without_names():
     result = get_northcoders_names([{"age": 32, "language": "Python"}])
     expected = []
@@ -420,11 +424,13 @@ get_user_pet_age(user) # returns 4
 
 
 def get_user_pet_age(user):
-    # Your code here
-    pass
+    if 'pet' in user:
+        if 'age' in user['pet']:
+            return user['pet']['age']
+    return None
 
 
-@skip_test
+@run_test
 def get_user_pet_age_should_return_pet_age():
     result = get_user_pet_age(
         {
@@ -437,14 +443,14 @@ def get_user_pet_age_should_return_pet_age():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_user_pet_age_should_return_none_if_no_pet():
     result = get_user_pet_age({"name": "Carrie", "age": 26})
     expected = None
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_user_pet_age_should_return_none_if_no_pet_age():
     result = get_user_pet_age(
         {
