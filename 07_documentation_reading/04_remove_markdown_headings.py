@@ -24,7 +24,7 @@ def remove_mark_down_headings(markdown_heading):
     
     """
 
-    pass
+    return markdown_heading.lstrip('# ')
 
 
 @run_test
@@ -33,7 +33,7 @@ def test_remove_single_mark_down_headings():
         format_err_msg("Title", remove_mark_down_headings("# Title"))
 
 
-@skip_test
+@run_test
 def test_remove_multiple_mark_down_headings():
     assert remove_mark_down_headings("## Sub Heading") == "Sub Heading", \
         format_err_msg(
