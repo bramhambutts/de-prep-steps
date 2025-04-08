@@ -25,7 +25,7 @@ flip_booleans([]) # returns []
 
 
 def flip_booleans(bools):
-    pass
+    return [not i for i in bools]
 
 
 @run_test
@@ -103,17 +103,19 @@ translate_key(student, 'prénom', 'first_name') # should return the following:
 
 
 def translate_key(student, key_to_change, translation):
-    pass
+    if key_to_change in student:
+        student[translation] = student.pop(key_to_change)
+    return student
 
 
-@skip_test
+@run_test
 def translate_key_should_return_empty_dictionary_when_passed_empty_dictionary():
     result = translate_key({}, "prénom", "first_name")
     expected = {}
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def translate_key_should_return_unchanged_if_key_not_present():
     result = translate_key(
         {"first_name": "Carla", "surname": "Bruni", "job": "Artist"},
@@ -124,7 +126,7 @@ def translate_key_should_return_unchanged_if_key_not_present():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def translate_key_should_return_new_dictionary_with_key_translated():
     result = translate_key(
         {"prénom": "Carla", "surname": "Bruni", "job": "Artist"}, "prénom", "first_name"
@@ -133,7 +135,7 @@ def translate_key_should_return_new_dictionary_with_key_translated():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def translate_key_should_return_new_dictionary():
     result = translate_key(
         {"first_name": "Jean", "surname": "Reno", "emploi": "Actor"}, "emploi", "job"
@@ -164,31 +166,34 @@ find_first_dentist([{'name': 'Callum', 'is_dentist': True},
 
 
 def find_first_dentist(people):
-    pass
+    for person in people:
+        if person["is_dentist"]:
+            return person
+    return None
 
 
-@skip_test
+@run_test
 def find_first_dentist_should_return_none_when_passed_empty_list():
     result = find_first_dentist([])
     expected = None
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def find_first_dentist_should_return_none_if_person_not_dentist():
     result = find_first_dentist([{"name": "Callum", "is_dentist": False}])
     expected = None
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def find_first_dentist_should_return_person_if_dentist():
     result = find_first_dentist([{"name": "Callum", "is_dentist": True}])
     expected = {"name": "Callum", "is_dentist": True}
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def find_first_dentist_should_return_first_dentist():
     result = find_first_dentist(
         [
@@ -200,7 +205,7 @@ def find_first_dentist_should_return_first_dentist():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def find_first_dentist_should_return_first_dentist_of_many():
     result = find_first_dentist(
         [
@@ -260,17 +265,21 @@ tally_people_in_manchester([]) # returns 0
 
 
 def tally_people_in_manchester(people):
-    pass
+    mancunians = 0
+    for person in people:
+        if person['lives']['city'] == 'Manchester' and person['lives']['country'] == 'UK':
+            mancunians += 1
+    return mancunians
 
 
-@skip_test
+@run_test
 def tally_people_in_manchester_should_return_0_when_passed_empty_list():
     result = tally_people_in_manchester([])
     expected = 0
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def tally_people_in_manchester_should_return_0_when_no_one_in_manchester():
     result = tally_people_in_manchester(
         [
@@ -285,7 +294,7 @@ def tally_people_in_manchester_should_return_0_when_no_one_in_manchester():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def tally_people_in_manchester_should_return_1_when_one_person_in_manchester():
     result = tally_people_in_manchester(
         [
@@ -300,7 +309,7 @@ def tally_people_in_manchester_should_return_1_when_one_person_in_manchester():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def tally_people_in_manchester_should_return_number_of_people_in_manchester_when_passed_multiple():
     result = tally_people_in_manchester(
         [
@@ -355,17 +364,21 @@ get_pug_owners([]) # returns []
 
 
 def get_pug_owners(dogs):
-    pass
+    puggles = []
+    for dog in dogs:
+        if dog['breed'] == 'Pug':
+            puggles.append(dog['owner'])
+    return puggles
 
 
-@skip_test
+@run_test
 def get_pug_owners_should_return_empty_list_when_passed_empty_list():
     result = get_pug_owners([])
     expected = []
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_pug_owners_should_return_empty_list_when_no_pugs():
     result = get_pug_owners(
         [
@@ -376,7 +389,7 @@ def get_pug_owners_should_return_empty_list_when_no_pugs():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_pug_owners_should_return_single_pug_owner():
     result = get_pug_owners(
         [
@@ -387,7 +400,7 @@ def get_pug_owners_should_return_single_pug_owner():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_pug_owners_should_return_multiple_pug_owners():
     result = get_pug_owners(
         [
@@ -399,7 +412,7 @@ def get_pug_owners_should_return_multiple_pug_owners():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_pug_owners_should_return_mixed_list():
     result = get_pug_owners(
         [
@@ -445,17 +458,21 @@ with any keys that contain lists pluralised (an 's' added to the end.)
 
 
 def pluralise_keys(dictionary):
-    pass
+    dicty = dictionary.copy()
+    for key in dictionary.keys():
+        if type(dicty[key]) == list:
+            dicty[key+'s'] = dicty.pop(key)
+    return dicty
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_empty_dictionary_when_passed_empty_dictionary():
     result = pluralise_keys({})
     expected = {}
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_unchanged_dictionary_when_there_are_no_lists():
     test_dict = {"a": 1, "b": 2, "c": 3}
     result = pluralise_keys(test_dict)
@@ -463,7 +480,7 @@ def pluralise_keys_should_return_unchanged_dictionary_when_there_are_no_lists():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_copy_of_dictionary_when_there_are_no_lists():
     test_dict = {"a": 1, "b": 2, "c": 3}
     result = pluralise_keys(test_dict)
@@ -472,7 +489,7 @@ def pluralise_keys_should_return_copy_of_dictionary_when_there_are_no_lists():
     )
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_unchanged_dictionary_with_nested_dicts():
     test_dict = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
     result = pluralise_keys(test_dict)
@@ -480,14 +497,14 @@ def pluralise_keys_should_return_unchanged_dictionary_with_nested_dicts():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_copy_of_dictionary_with_nested_dicts():
     test_dict = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
     result = pluralise_keys(test_dict)
     assert result is not test_dict, format_err_msg("new dictionary", "input dictionary")
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_dictionary_with_one_key_changed():
     test_dict = {"a": 1, "b": 2, "num": [3, 4]}
     result = pluralise_keys(test_dict)
@@ -495,14 +512,14 @@ def pluralise_keys_should_return_dictionary_with_one_key_changed():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_copy_of_dictionary_with_one_nested_list():
     test_dict = {"a": 1, "b": 2, "num": [3, 4]}
     result = pluralise_keys(test_dict)
     assert result is not test_dict, format_err_msg("new dictionary", "input dictionary")
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_dictionary_with_several_keys_changed():
     test_dict = {
         "name": "Tom",
@@ -526,7 +543,7 @@ def pluralise_keys_should_return_dictionary_with_several_keys_changed():
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def pluralise_keys_should_return_copy_of_dictionary_with_several_lists():
     test_dict = {
         "name": "Tom",
@@ -560,31 +577,35 @@ get_word_lengths('') # returns []
 
 
 def get_word_lengths(string):
-    pass
+    strong = string.split()
+    nums = []
+    for word in strong:
+        nums.append(len(word))
+    return nums
 
 
-@skip_test
+@run_test
 def get_word_lengths_should_return_empty_list_when_passed_empty_string():
     result = get_word_lengths("")
     expected = []
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_word_lengths_should_return_single_word_length():
     result = get_word_lengths("hello")
     expected = [5]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_word_lengths_should_return_two_word_lengths():
     result = get_word_lengths("hello everyone")
     expected = [5, 8]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_word_lengths_should_return_multiple_word_lengths():
     result = get_word_lengths("It is a pleasure to meet you new coder")
     expected = [2, 2, 1, 8, 2, 4, 3, 3, 5]
@@ -609,38 +630,42 @@ get_palindromes([]) # returns []
 
 
 def get_palindromes(words):
-    pass
+    pals = []
+    for word in words:
+        if word[::-1] == word:
+            pals.append(word)
+    return pals
 
 
-@skip_test
+@run_test
 def get_palindromes_should_return_empty_list_when_passed_empty_list():
     result = get_palindromes([])
     expected = []
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_palindromes_should_return_empty_list_when_passed_no_palindromes():
     result = get_palindromes(["boom"])
     expected = []
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_palindromes_should_return_single_palindrome():
     result = get_palindromes(["racecar"])
     expected = ["racecar"]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_palindromes_should_return_multiple_palindromes_from_assorted_list():
     result = get_palindromes(["dog", "dud", "car", "mum"])
     expected = ["dud", "mum"]
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def get_palindromes_should_return_empty_list_when_no_palindromes_in_list():
     result = get_palindromes(["apple", "orange", "banana"])
     expected = []
@@ -667,73 +692,79 @@ replace_letters_with_x('Do you like coding?') # returns 'XX XXX XXXX XXXXXX?'
 
 
 def replace_letters_with_x(string):
-    pass
+    new_string = ''
+    for character in string:
+        if character.isalpha():
+            new_string += 'X'
+        else:
+            new_string += character
+    return new_string
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_empty_string_when_passed_empty_string():
     result = replace_letters_with_x("")
     expected = ""
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_non_letter_character():
     result = replace_letters_with_x("5")
     expected = "5"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_special_character():
     result = replace_letters_with_x("&")
     expected = "&"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_letter_changed_to_X():
     result = replace_letters_with_x("a")
     expected = "X"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_letter_changed_to_X_uppercase():
     result = replace_letters_with_x("K")
     expected = "X"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_word_changed_to_X():
     result = replace_letters_with_x("hello")
     expected = "XXXXX"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_word_changed_to_X_mixed_case():
     result = replace_letters_with_x("NoRtHcOdErS")
     expected = "XXXXXXXXXXX"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_word_changed_to_X_with_punctuation_exclamation_mark():
     result = replace_letters_with_x("Kaboom!")
     expected = "XXXXXX!"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_single_word_changed_to_X_with_punctuation_question_mark():
     result = replace_letters_with_x("Northcoders?")
     expected = "XXXXXXXXXXX?"
     assert result == expected, format_err_msg(expected, result)
 
 
-@skip_test
+@run_test
 def replace_letters_with_x_should_return_several_words():
     result = replace_letters_with_x("Do you like coding?")
     expected = "XX XXX XXXX XXXXXX?"
