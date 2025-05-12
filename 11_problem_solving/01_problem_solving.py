@@ -17,8 +17,10 @@ check_word_ends_with_ing('dancing') returns True
 """
 
 
-def check_word_ends_with_ing():
-    pass
+def check_word_ends_with_ing(word):
+    if word[-3:] == 'ing':
+        return True
+    return False
 
 
 @run_test
@@ -47,11 +49,11 @@ get_remainder(10, 3) returns 1
 """
 
 
-def get_remainder():
-    pass
+def get_remainder(a, b):
+    return a % b
 
 
-@skip_test
+@run_test
 def test_get_remainder():
     assert get_remainder(10, 2) == 0, format_err_msg(0, get_remainder(10, 2))
     assert get_remainder(119, 10) == 9, format_err_msg(
@@ -73,10 +75,13 @@ access_object({"name": "nara", "age": 5}, "email") returns "property not found"
 
 
 def access_object(obj, key):
-    pass
+    try:
+        return obj[key]
+    except KeyError:
+        return 'property not found'
 
 
-@skip_test
+@run_test
 def test_access_object():
     assert (
         access_object({"name": "nara", "age": 5}, "name") == "nara"
@@ -106,10 +111,10 @@ get_positive_numbers([-1, 2, -3]) returns [2]
 
 
 def get_positive_numbers(num_list):
-    pass
+    return [i for i in num_list if i >= 0]
 
 
-@skip_test
+@run_test
 def test_get_positive_numbers():
     assert get_positive_numbers([1, -1, 2, -2, 3, -3]) == [
         1,
@@ -140,10 +145,10 @@ collect_the_vowels("hello") returns "eo"
 
 
 def collect_the_vowels(sample_string):
-    pass
+    return ''.join([i for i in sample_string if i in list('aeiou')])
 
 
-@skip_test
+@run_test
 def test_collect_the_vowels():
     assert collect_the_vowels("a") == "a", format_err_msg(
         "a", collect_the_vowels("a")
@@ -172,10 +177,10 @@ access_item(["a", "b", "c", "d"], 5) == "b"
 
 
 def access_item(sample_list, index):
-    pass
+    return sample_list[index % len(sample_list)]
 
 
-@skip_test
+@run_test
 def test_access_item_retrieves_item_when_passed_index_less_than_list_len():
     assert access_item(["a", "b", "c", "d"], 2) == "c", format_err_msg(
         "c", access_item(["a", "b", "c", "d"], 2)
@@ -188,7 +193,7 @@ def test_access_item_retrieves_item_when_passed_index_less_than_list_len():
     )
 
 
-@skip_test
+@run_test
 def test_access_item_retrieves_item_when_passed_index_greater_or_equal_to_list_len():
     assert access_item(["a", "b", "c", "d"], 4) == "a", format_err_msg(
         "a", access_item(["a", "b", "c", "d"], 4)
@@ -206,5 +211,6 @@ if __name__ == "__main__":
     test_get_remainder()
     test_access_object()
     test_get_positive_numbers()
+    test_collect_the_vowels()
     test_access_item_retrieves_item_when_passed_index_greater_or_equal_to_list_len()
     test_access_item_retrieves_item_when_passed_index_less_than_list_len()
