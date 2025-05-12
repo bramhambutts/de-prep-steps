@@ -23,7 +23,12 @@ def sum_nums(text):
 
     If there are no numbers, you should return 0
     """
-    pass
+    mygex = re.compile(r'\d+')
+    numbers = mygex.findall(text)
+    total = 0
+    for num in numbers:
+        total += int(num)
+    return total
 
 
 @run_test

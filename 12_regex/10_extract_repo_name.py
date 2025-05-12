@@ -23,7 +23,9 @@ def extract_repo_name(text):
     where "northcoders" is the name of the account and "de-intro-regex" is the
     name of the repo
     """
-    pass
+    mygex = re.compile(r'/+[\w-]+')
+    broken_url = mygex.findall(text)
+    return broken_url[2][1:]
 
 
 @run_test

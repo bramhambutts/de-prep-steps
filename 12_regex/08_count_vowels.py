@@ -19,7 +19,9 @@ def count_vowels(text):
     This function should take a string as an argument, and return a count
     representing the number of vowels it contains
     """
-    pass
+    mygex = re.compile(r'[aeiou]{1}', re.IGNORECASE)
+    counts = mygex.findall(text)
+    return len(counts)
 
 
 @run_test

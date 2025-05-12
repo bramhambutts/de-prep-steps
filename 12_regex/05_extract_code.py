@@ -24,7 +24,9 @@ def extract_code(text):
     You should extract that number from the string and return it as
     an integer
     """
-    pass
+    mygex = re.compile(r'\d+')
+    searched = mygex.search(text)
+    return int(text[searched.span()[0]:searched.span()[1]])
 
 
 @run_test
