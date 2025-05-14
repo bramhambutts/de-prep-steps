@@ -1,3 +1,10 @@
 First of all, we need to check that all of the bakers have been put into the table correctly.
 
 Use the SELECT command to look at all of the bakers. Paste the results below:
+
+1|Harrison|Flower Power
+2|Niamh|Bread Zeppelin
+3|Poonam|Pain Au Rajput
+4|Lewis|Lews Buns
+5|Kyle|The Bun Also Rises
+6|Rob|Robs Cobs
