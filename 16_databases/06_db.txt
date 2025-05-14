@@ -1,3 +1,16 @@
 Write a command that shows me the names of all the baked_goods that exist in the baked_goods table.
 
 Paste results below:
+
+Sausage roll
+Carrot cake
+Cornish pasty
+Steak slice
+Meat and potato pie
+Loaf of bread
+Chocolate eclair
+Cheesecake
+Cobs
+Vanilla slice
+Cinnamon bun
+Wedding cake

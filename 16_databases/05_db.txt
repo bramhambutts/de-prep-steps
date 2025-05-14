@@ -9,3 +9,16 @@ We need more than one table! Please create a table called 'baked_goods'.
 Then, insert the data (found in data/baked_goods.txt) and make sure that all the data has been inserted properly with a SELECT command.
 
 Paste the results below:
+
+1|Sausage roll|Pain Au Rajput|2
+2|Carrot cake|Pain Au Rajput|0
+3|Cornish pasty|Lews Buns|17
+4|Steak slice|Lews Buns|0
+5|Meat and potato pie|Flower Power|42
+6|Loaf of bread|Bread Zeppelin|150
+7|Chocolate eclair|The Bun Also Rises|7
+8|Cheesecake|Flower Power|0
+9|Cobs|Robs Cobs|77
+10|Vanilla slice|Robs Cobs|0
+11|Cinnamon bun|Robs Cobs|0
+12|Wedding cake|Robs Cobs|0

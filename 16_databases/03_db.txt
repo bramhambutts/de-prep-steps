@@ -1,3 +1,5 @@
 Now, we don't need to see all of the bakers. I only need to see the ones specifically named 'Robs Cobs'.
 
 Use the SELECT and WHERE keywords to look at the data for this bakery. Paste the results below:
+
+6|Rob|Robs Cobs

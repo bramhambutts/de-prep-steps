@@ -1,3 +1,9 @@
 Great! But Kyle has gone back to Data Engineering, he couldn't stay away! I don't want to see his data any more.
 
 Use the SELECT and WHERE and another keyword to show me all of the bakers' data except Kyle's. Paste the results below:
+
+1|Harrison|Flower Power
+2|Niamh|Bread Zeppelin
+3|Poonam|Pain Au Rajput
+4|Lewis|Lews Buns
+6|Rob|Robs Cobs
