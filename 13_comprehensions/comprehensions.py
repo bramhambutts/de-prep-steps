@@ -32,7 +32,7 @@ def create_greeting_strings(names):
     for name in names:
         greeting.append(f"Hello {name}!")
 
-    return greeting
+    return [f'Hello {name}!' for name in names]
 
 
 @run_test
@@ -42,14 +42,14 @@ def test_create_greeting_strings_return_empty_list():
     )
 
 
-@skip_test
+@run_test
 def test_create_greeting_strings_greets_single_name_in_list():
     assert create_greeting_strings(["Danika"]) == [
         "Hello Danika!"
     ], format_err_msg("Hello Danika!", create_greeting_strings(["Danika"]))
 
 
-@skip_test
+@run_test
 def test_create_greeting_strings_greets_all_names_in_list():
     test_list = ["Paul", "Joe", "Hannah", "Alex", "Harrison", "Simon", "Kyle"]
     expected_result = [
@@ -81,31 +81,31 @@ There is no existing code for you to refactor, instead you should solve `increme
 """
 
 def increment_even_numbers(number_list):
-    pass
+    return [num + 1 if num % 2 == 0 else num for num in number_list]
 
 
-@skip_test
+@run_test
 def test_increment_even_numbers_return_empty_list():
     assert increment_even_numbers([]) == [], format_err_msg(
         [], increment_even_numbers([])
     )
 
 
-@skip_test
+@run_test
 def test_increment_even_numbers_increments_even_numbers():
     assert increment_even_numbers([2, 4, 6]) == [3, 5, 7], format_err_msg(
         [3, 5, 7], increment_even_numbers([2, 4, 6])
     )
 
 
-@skip_test
+@run_test
 def test_increment_even_numbers_ignores_odd_numbers():
     assert increment_even_numbers([1, 3, 5]) == [1, 3, 5], format_err_msg(
         [1, 3, 5], increment_even_numbers([1, 3, 5])
     )
 
 
-@skip_test
+@run_test
 def test_increment_even_numbers_mixed_even_and_odd():
     assert increment_even_numbers([1, 2, 3, 4, 5]) == [
         1,
@@ -139,17 +139,17 @@ def switch_name_and_id(data):
     for record in data.items():
         switched_data[record[1]] = record[0]
 
-    return switched_data
+    return {data: key for key, data in zip(data.keys(), data.values())}
 
 
-@skip_test
+@run_test
 def test_switch_name_and_id_passed_empty_dict_returns_empty_dict_():
     assert switch_name_and_id({}) == {}, format_err_msg(
         {}, switch_name_and_id({})
     )
 
 
-@skip_test
+@run_test
 def test_switch_name_and_id_returns_dict_with_single_swapped_key_and_value():
     assert switch_name_and_id({"Alex": "a7d29w"}) == {
         "a7d29w": "Alex"
@@ -166,7 +166,7 @@ def test_switch_name_and_id_returns_dict_with_single_swapped_key_and_value():
     }, format_err_msg({"p3f44m": "Cat"}, switch_name_and_id({"Cat": "p3f44m"}))
 
 
-@skip_test
+@run_test
 def test_switch_name_and_id_returns_dict_with_swapped_keys_and_values():
     assert switch_name_and_id({"Alex": "a7d29w", "Chon": "z2r51e"}) == {
         "a7d29w": "Alex",
@@ -235,15 +235,15 @@ There is no existing code for you to refactor. Instead, you should solve `find_a
 """
 
 def find_average_games(games):
-    pass
+    return {game[0]: game[1] for game in games if game[1] > 25 and game[1] < 75}
 
 
-@skip_test
+@run_test
 def test_find_average_games_passed_empty_list_returns_empty_dict():
     assert find_average_games([]) == {}
 
 
-@skip_test
+@run_test
 def test_find_average_games_returns_dict_with_average_games():
     assert find_average_games([["Minecraft", 67]]) == {"Minecraft": 67}
     assert find_average_games(
@@ -251,7 +251,7 @@ def test_find_average_games_returns_dict_with_average_games():
     ) == {"The Sims 2": 50, "World of Warcraft": 33}
 
 
-@skip_test
+@run_test
 def test_find_average_games_returns_empty_dict_when_only_highly_rated_games():
     assert find_average_games([["Old School Runescape", 100]]) == {}
     assert (
@@ -269,7 +269,7 @@ def test_find_average_games_returns_empty_dict_when_only_highly_rated_games():
     )
 
 
-@skip_test
+@run_test
 def test_find_average_games_returns_empty_dict_when_only_poorly_rated_games():
     assert find_average_games([["Baldur's Gate 3", 0]]) == {}
     assert find_average_games([["Call of Duty", 5], ["Farmville", 17]]) == {}
@@ -285,7 +285,7 @@ def test_find_average_games_returns_empty_dict_when_only_poorly_rated_games():
     )
 
 
-@skip_test
+@run_test
 def test_find_average_games_returns_dict_with_average_games_mixed_scoring():
     assert find_average_games([["Minecraft", 67], ["Baldur's Gate 3", 0]]) == {
         "Minecraft": 67
@@ -363,7 +363,7 @@ def get_unique_departments(employees):
         if employee["department"] not in unique_departments:
             unique_departments.append(employee["department"])
 
-    return unique_departments
+    return {employee['department'] for employee in employees}
 
 
 @run_test
@@ -373,7 +373,7 @@ def test_get_unique_departments():
     )
 
 
-@skip_test
+@run_test
 def test_get_unique_departments_single():
     output = get_unique_departments([{"name": "Simon", "department": "HR"}])
 
@@ -399,7 +399,7 @@ def test_get_unique_departments_multiple_employee_unique_departments():
     assert len(output) == 3, format_err_msg(3, len(output))
 
 
-@skip_test
+@run_test
 def test_get_unique_departments_multi_employee_single_department():
     output = get_unique_departments(
         [
@@ -413,7 +413,7 @@ def test_get_unique_departments_multi_employee_single_department():
     assert len(output) == 1, format_err_msg(1, len(output))
 
 
-@skip_test
+@run_test
 def test_get_unique_departments_multi_employee_multi_department():
     output = get_unique_departments(
         [
