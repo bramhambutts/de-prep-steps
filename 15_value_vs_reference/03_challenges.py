@@ -11,21 +11,21 @@ def true_or_false_1():
     list_1 = [1, 2, 3]
     list_2 = [4, 5, 6]
     list_2 = list_1
-    assert (list_1 is list_2) == FILL_ME_IN
+    assert (list_1 is list_2) == True
 
-@skip_test
+@run_test
 def true_or_false_2():
     list_1 = [1, 2, 3]
     list_2 = list_1
     list_2.append(4)
-    assert (list_1 is list_2) == FILL_ME_IN
+    assert (list_1 is list_2) == True
 
-@skip_test
+@run_test
 def true_or_false_3():
     list_1 = [1, 2, 3]
     list_2 = list_1
     list_1 = list_1 + [4, 5, 6] 
-    assert (list_1 is list_2) == FILL_ME_IN
+    assert (list_1 is list_2) == False
 
 
 # DO NOT CHANGE CODE BELOW THIS LINE
